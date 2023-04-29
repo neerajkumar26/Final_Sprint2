@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Spaceship</title>
+	<link rel="stylesheet" href="static/css/styles.css">
+</head>
+
+<body>
+	{% extends "base.html" %}
+	{% block content %}
+	{% include "navbar.html" %}
+	<h1 >SpaceShips --></h1>
+	<div class="container my-5">
+		<table class="table border=" 1">
+			<thead>
+				<tr>
+					<th>SpaceShip No.</th>
+					<th>Max Weight</th>
+					<th>Captain</th>
+					<th colspan="2"></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for item in spaceship %}
+				<tr>
+					<td>{{ loop.index }}</td>
+					<td>{{ item.maxweight }}</td>
+					<td>{{ item.captainid }}</td>
+					<td><a href="/spaceship/delete/{{loop.index}}" class="btn btn-outline-danger btn-sm">Delete</button></td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+	<div id="add-spaceship-form" class="container my-5">
+		<div class="row justify-content-center">
+			<div class="col-md-6 mt-2">
+				<h2 class="text-center mt-4">Add New Spaceship</h2>
+				<form id="add-spaceship-form" action="{{ url_for('add_spaceship') }}" method="POST">
+					<div class="form-group">
+						<label for="maxweight">Max Weight:</label>
+						<input type="text" class="form-control" id="maxweight" name="maxweight">
+					</div>
+					<div class="form-group">
+						<label for="captainid">Captain</label>
+						<input type="text" class="form-control" id="captainid" name="captainid">
+					</div>
+					<button id="add-spaceship-btn" type="submit" class="btn btn-success mb-4">Add Spaceship</button>
+				</form>
+				<div id="message" style="display: none;">
+					<div class="alert alert-success" role="alert">spaceship added successfully.</div>
+					<div class="alert alert-danger" role="alert">spaceship addition failed.</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="update-spaceship-form" class="container my-5">
+		<div class="row justify-content-center">
+			<div class="col-md-6 mt-2">
+				<h2 class="text-center mt-4">Update Spaceship</h2>
+				<form id="update-spaceship-form" method="POST">
+					<div class="form-group">
+						<label for="id">ID of record to update:</label>
+						<input type="number" class="form-control" id="id" name="id">
+					</div>
+					<div class="form-group">
+						<label for="maxweight">Max Weight:</label>
+						<input type="text" class="form-control" id="maxweight" name="maxweight">
+					</div>
+					<div class="form-group">
+						<label for="captainid">Captain</label>
+						<input type="text" class="form-control" id="captainid" name="captainid">
+					</div>
+					<button id="update-spaceship-btn" type="submit" class="btn btn-success mb-4">Update
+						Spaceship</button>
+				</form>
+				<div id="message" style="display: none;">
+					<div class="alert alert-success" role="alert">spaceship updated successfully.</div>
+					<div class="alert alert-danger" role="alert">spaceship update failed.</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endblock %}
+</body>
+
+</html>

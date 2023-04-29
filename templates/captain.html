@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Captain</title>
+	<link rel="stylesheet" href="static/css/styles.css">
+</head>
+
+<body>
+	{% extends "base.html" %}
+
+	{% block content %}
+	{% include "navbar.html" %}
+	<h1>Captains --></h1>
+	<div class="container">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Captain No.</th>
+					<th>Firsrt Name</th>
+					<th>Last Name</th>
+					<th>Rank</th>
+					<th colspan="2">Home Planet</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for item in captain_data %}
+				<tr>
+					<td>{{ loop.index }}</td>
+					<td>{{ item.firstname }}</td>
+					<td>{{ item.lastname }}</td>
+					<td>{{ item.rank }}</td>
+					<td>{{ item.homeplanet }}</td>
+					<td><a href="/captain/delete/{{loop.index}}" class="btn btn-outline-danger btn-sm">Delete</button>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+	<div class="container my-5">
+		<div class="col-md-6 mt-2">
+			<h2 class="text-center mt-4">Add New captain</h2>
+			<form action="{{ url_for('add_captain') }}" method="POST">
+				<div class="form-group">
+					<label for="firstname">First Name:</label>
+					<input type="text" class="form-control" id="firstname" name="firstname">
+				</div>
+				<div class="form-group">
+					<label for="lastname">Last Name:</label>
+					<input type="text" class="form-control" id="lastname" name="lastname">
+				</div>
+				<div class="form-group">
+					<label for="rank">Rank:</label>
+					<input type="text" class="form-control" id="rank" name="rank">
+				</div>
+				<div class="form-group">
+					<label for="homeplanet">Home Planet:</label>
+					<input type="text" class="form-control" id="homeplanet" name="homeplanet">
+				</div>
+				<button id="add-captain-btn" type="submit" class="btn btn-success mb-4">Add Captain</button>
+			</form>
+			<div id="message" style="display: none;">
+				<div class="alert alert-success" role="alert">Captain added successfully.</div>
+				<div class="alert alert-danger" role="alert">Captain addition failed.</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container my-5">
+		<div class="col-md-6 mt-2">
+			<h2 class="text-center mt-4">Update Captain</h2>
+			<form action="{{url_for('update_captain')}}" method="POST">
+				<div class="form-group">
+					<label for="id">ID of record to update:</label>
+					<input type="number" class="form-control" id="id" name="id">
+				</div>
+				<div class="form-group">
+					<label for="firstname">First Name:</label>
+					<input type="text" class="form-control" id="firstname" name="firstname">
+				</div>
+				<div class="form-group">
+					<label for="lastname">Last Name:</label>
+					<input type="text" class="form-control" id="lastname" name="lastname">
+				</div>
+				<div class="form-group">
+					<label for="rank">Rank:</label>
+					<input type="text" class="form-control" id="rank" name="rank">
+				</div>
+				<div class="form-group">
+					<label for="homeplanet">Home Planet:</label>
+					<input type="text" class="form-control" id="homeplanet" name="homeplanet">
+				</div>
+				<button id="update-captain-btn" type="submit" class="btn btn-success mb-4">Update
+					captain</button>
+			</form>
+			<div id="message" style="display: none;">
+				<div class="alert alert-success" role="alert">Captain details updated successfully.</div>
+				<div class="alert alert-danger" role="alert">Captain details update failed.</div>
+			</div>
+		</div>
+	</div>
+	{% endblock %}
+</body>
+
+</html>

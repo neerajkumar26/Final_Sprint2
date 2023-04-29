@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Cargo</title>
+	<link rel="stylesheet" href="./../static/css/styles.css">
+</head>
+
+<body>
+	{% extends "base.html" %}
+
+	{% block content %}
+	{% include "navbar.html" %}
+	<h1>Cargos --></h1>
+	<div class="container my-5">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Cargo No.</th>
+					<th>Weight</th>
+					<th>Cargo Type</th>
+					<th>Departure</th>
+					<th>Arrival</th>
+					<th colspan="2">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for item in cargo_data %}
+				<tr>
+					<td>{{ loop.index }}</td>
+					<td>{{ item.weight }}</td>
+					<td>{{ item.cargotype }}</td>
+					<td>{{ item.departure }}</td>
+					<td>{{ item.arrival }}</td>
+					<td><a href="/cargo/delete/{{loop.index}}" class="btn btn-outline-danger btn-sm">Delete</button>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+	<!-- Add Cargo form goes here -->
+	<div class="container my-5">
+		<div class="col-md-6 mt-2">
+			<h2 class="text-center mt-4">Add A Cargo</h2>
+			<form id="add-cargo-form" action="{{ url_for('add_cargo') }}" method="POST">
+				<div class="form-group">
+					<label for="weight">Weight:</label>
+					<input type="text" class="form-control" id="weight" name="weight">
+				</div>
+				<div class="form-group">
+					<label for="cargo_type">Cargo Type:</label>
+					<input type="text" class="form-control" id="cargo-type" name="cargo_type">
+				</div>
+				<div class="form-group">
+					<label for="departure">Departure:</label>
+					<input type="text" class="form-control" id="departure" name="departure">
+				</div>
+				<div class="form-group">
+					<label for="arrival">Arrival:</label>
+					<input type="text" class="form-control" id="arrival" name="arrival">
+				</div>
+				<div class="form-group">
+					<label for="shipid">Ship ID:</label>
+					<input type="text" class="form-control" id="shipid" name="shipid">
+				</div>
+				<button id="add-cargo-btn" type="submit" class="btn btn-success mb-4 text-center">Add Cargo</button>
+			</form>
+			<div id="message" style="display: none;">
+				<div class="alert alert-success" role="alert">Captain details updated successfully.</div>
+				<div class="alert alert-danger" role="alert">Captain details update failed.</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container my-5">
+		<div class="col-md-6 mt-2">
+			<h2 class="text-center mt-4">Update cargo</h2>
+			<form action="{{url_for('update_cargo')}}" method="POST">
+				<div class="form-group">
+					<label for="id">ID of record to update:</label>
+					<input type="number" class="form-control" id="id" name="id">
+				</div>
+				<div class="form-group">
+					<label for="weight">Weight:</label>
+					<input type="text" class="form-control" id="weight" name="weight">
+				</div>
+				<div class="form-group">
+					<label for="cargotype">Cargo Type:</label>
+					<input type="text" class="form-control" id="cargotype" name="cargotype">
+				</div>
+				<div class="form-group">
+					<label for="departure">departure:</label>
+					<input type="text" class="form-control" id="departure" name="departure">
+				</div>
+				<div class="form-group">
+					<label for="arrival">Arrival: </label>
+					<input type="text" class="form-control" id="arrival" name="arrival">
+				</div>
+				<div class="form-group">
+					<label for="shipid">ship ID: </label>
+					<input type="text" class="form-control" id="shipid" name="shipid">
+				</div>
+				<button id="update-cargo-btn" type="submit" class="btn btn-success mb-4">Update Cargo</button>
+			</form>
+			<div id="message" style="display: none;">
+				<div class="alert alert-success" role="alert">Cargo details updated successfully.</div>
+				<div class="alert alert-danger" role="alert">Cargo details update failed.</div>
+			</div>
+		</div>
+	</div>
+
+	{% endblock %}
+</body>
+
+</html>

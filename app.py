@@ -159,7 +159,7 @@ def delete_cargo(id):
         cur.close()
         return jsonify({'message': str(e)}), 500
 
-#CAPTAIN ROUTING DETAILS 
+#CAPTAIN ROUTING DETAILS
 @app.route('/captain')
 def captain():
     try:
